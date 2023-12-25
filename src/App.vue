@@ -1,26 +1,83 @@
 <template>
-  <img alt="Vue logo" src="./assets/logo.png">
-  <HelloWorld msg="Welcome to Your Vue.js App"/>
+   <!-- <div class="center">
+    <div class="form">
+      <div class="fom-element">
+        <input :type="type" v-model="userPassword" id="password-field" />
+        <div class="toggle-password" @click="changeType()">
+          <i
+            class="fa fa-eye"
+            v-if="type === 'password'"
+            aria-hidden="true"
+          ></i>
+          <i class="fa fa-eye-slash" v-else></i>
+        </div>
+      </div>
+      {{ userPassword }}
+       to way binding 
+    </div>
+  </div>  -->
+  <formBuilder class="form-builder" />
 </template>
-
 <script>
-import HelloWorld from './components/HelloWorld.vue'
-
+import formBuilder from "./components/formBuilder.vue";
 export default {
-  name: 'App',
+  name: "App",
   components: {
-    HelloWorld
-  }
-}
+    formBuilder,
+  },
+  data() {
+    return {
+      type: "password",
+      userPassword: "",
+      formField: {
+        userName: "",
+        password: "",
+        email: "",
+        phoneNumber: "",
+        genderType: "",
+        postalCode: "",
+        address: "",
+        birthDate: "",
+      },
+    };
+  },
+  methods: {
+    changeType() {
+      console.log("start");
+      this.type == "password" ? (this.type = "text") : (this.type = "password");
+    },
+  },
+};
 </script>
-
-<style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
+<style scoped lang="scss">
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
 }
+/* .form {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+.fom-element {
+  background-color: rgb(167, 8, 167);
+  display: flex;
+  align-items: center;
+  color: white;
+  border-radius: 1rem;
+  padding: 1rem;
+}
+.fom-element input {
+  background-color: rgb(167, 8, 167);
+  border-radius: 1rem;
+  color: white;
+  font-size: 1.5rem;
+  outline: none;
+  border: none;
+}
+.toggle-password {
+  cursor: pointer;
+} */
 </style>
