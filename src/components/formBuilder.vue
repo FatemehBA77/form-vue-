@@ -18,11 +18,11 @@
             <input type="text" id="phone_number" />
             <div class="checkbox_form">
               <div class="famel">
-                <label for="female">female</label>
+                <!-- <label for="female">female</label> -->
                 <input type="checkbox" class="checkbox" id="female" />
               </div>
               <div>
-                <label for="male">male</label>
+                <!-- <label for="male">male</label> -->
                 <input type="checkbox" class="checkbox" id="male" />
               </div>
             </div>
@@ -78,15 +78,19 @@ body {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  
+  justify-content: space-evenly;
+  label {
+    height: 30px;
+    width: 100%;
+    display: block;
+  }
 }
 .input_form {
-  width: auto;
   background-color: rgb(17, 185, 177);
   display: flex;
   flex-direction: column;
   align-items: flex-start;
- 
+  justify-content: space-evenly;
 }
 .lable_form label {
   border-radius: 8px;
@@ -97,6 +101,8 @@ body {
   border: none;
   border-radius: 8px;
   background-color: burlywood;
+  height: 30px;
+  width: 100%;
 }
 .img_form {
   background-color: rgb(174, 185, 17);
