@@ -2,45 +2,56 @@
   <div class="content">
     <div class="form">
       <div class="form-container">
-        <div class="total_form">
-          <div class="lable_form">
+        <section class="elements">
+          <div class="lable__form">
+            <label for="username">username:</label>
             <label for="password">Password:</label>
             <label for="email">Email:</label>
             <label for="phone_number">PhoneNumber:</label>
-            <label for="gender">GenderType:</label>
             <label for="postal-code">PostalCode:</label>
             <label for="address">Address:</label>
             <label for="birth-date">BirthDate:</label>
           </div>
-          <div class="input_form">
+          <div class="input__form">
+            <input type="text" id="username" />
             <input type="password" id="password" />
             <input type="text" id="email" />
             <input type="text" id="phone_number" />
-            <div class="checkbox_form">
-              <div class="famel">
-                <label for="female">female</label>
-                <input type="checkbox" class="checkbox" id="female" />
-              </div>
-              <div>
-                <label for="male">male</label>
-                <input type="checkbox" class="checkbox" id="male" />
-              </div>
-            </div>
             <input type="text" id="post-code" />
             <input type="text" id="address" />
-            <input type="text" id="birth-date" />
+            <date-picker />
           </div>
-        </div>
-        <div class="img_form">
-          <img src="../assets/images/1.png" alt="" />
+          <div class="img_form">
+            <img src="../assets/images/1.png" alt="" />
+          </div>
+        </section>
+        <div class="btn__primary">
+          <button>Submit</button>
         </div>
       </div>
     </div>
   </div>
 </template>
 <script>
+import VuePersianDatetimePicker from "vue-persian-datetime-picker";
 export default {
   name: "formBuilder",
+  data() {
+    return {
+      formBuild: {
+        userName: "",
+        password: "",
+        email: "",
+        phoneNumber: "",
+        postalCode: "",
+        address: "",
+        birthDate: "",
+      },
+    };
+  },
+  components: {
+    datePicker: VuePersianDatetimePicker,
+  },
 };
 </script>
 <style scoped lang="scss">
@@ -52,12 +63,26 @@ body {
   box-sizing: border-box;
   font-family: Poppins;
 }
-.form-container {
+.form {
   display: flex;
-  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  height: 97.5vh;
+}
+.form-container {
+  background-color: rgb(236, 117, 117);
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
   justify-content: center;
   align-content: center;
   height: 100%;
+  width: 50%;
+}
+.elements {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 @media screen and (max-width: 600px) {
   .form-container {
@@ -67,51 +92,50 @@ body {
     justify-content: center;
   }
 }
-.total_form {
-  display: flex;
-  align-content: center;
-  justify-content: space-between;
-}
-.lable_form {
-  width: auto;
-  background-color: rgb(185, 14, 185);
+.lable__form {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  
 }
-.input_form {
-  width: auto;
-  background-color: rgb(17, 185, 177);
+.lable__form label {
+  margin-bottom: 2rem;
+  padding: 0.9rem;
+}
+.input__form {
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
- 
+  align-items: flex-end;
 }
-.lable_form label {
-  border-radius: 8px;
-  background-color: #f1bdf1;
-}
-.input_form input {
+.input__form input {
+  margin-bottom: 2.1rem;
   outline: none;
   border: none;
+  padding: 1rem 1.5rem;
   border-radius: 8px;
-  background-color: burlywood;
 }
 .img_form {
-  background-color: rgb(174, 185, 17);
-}
-.checkbox_form {
   display: flex;
-  justify-content: space-around;
+  justify-content: center;
   align-items: center;
   width: 100%;
+  img {
+    width: inherit;
+    height: inherit;
+  }
 }
-#male,
-#female {
-  margin-left: 0.5rem;
-}
-.checkbox:hover input ~ .checkmark {
-  background-color: #c095c0;
+.btn__primary {
+  display: flex;
+  justify-content: end;
+  align-items: center;
+  button {
+    outline: none;
+    border: none;
+    padding: 1rem 1.25rem;
+    border-radius: 8px;
+    cursor: pointer;
+    background-color: rgb(187, 66, 66);
+    color: white;
+    font-size: 0.85rem;
+  }
 }
 </style>
