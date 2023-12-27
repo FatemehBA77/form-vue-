@@ -4,36 +4,62 @@
       <div class="form-container">
         <section class="elements">
           <div class="lable__form">
-            <label for="username">username:</label>
-            <label for="password">Password:</label>
-            <label for="email">Email:</label>
-            <label for="phone_number">PhoneNumber:</label>
-            <label for="postal-code">PostalCode:</label>
-            <label for="address">Address:</label>
-            <label for="birth-date">BirthDate:</label>
-          </div>
-          <div class="input__form">
-            <input type="text" id="username" />
-            <input type="password" id="password" />
-            <input type="text" id="email" />
-            <input type="text" id="phone_number" />
-            <input type="text" id="post-code" />
-            <input type="text" id="address" />
-            <date-picker />
+            <div class="lables">
+              <label for="username">username:</label>
+              <input v-model="formBuild.userName" type="text" id="username" />
+            </div>
+            <div class="lables">
+              <label for="password">Password:</label>
+              <input
+                v-model="formBuild.password"
+                type="password"
+                id="password"
+              />
+            </div>
+            <div class="lables">
+              <label for="email">Email:</label>
+              <input v-model="formBuild.email" type="text" id="email" />
+            </div>
+            <div class="lables">
+              <label for="phone_number">PhoneNumber:</label>
+              <input
+                v-model="formBuild.phoneNumber"
+                type="text"
+                id="phone_number"
+              />
+            </div>
+            <div class="lables">
+              <label for="postal-code">PostalCode:</label>
+              <input
+                v-model="formBuild.postalCode"
+                type="text"
+                id="post-code"
+              />
+            </div>
+            <div class="lables">
+              <label for="address">Address:</label>
+              <input v-model="formBuild.address" type="text" id="address" />
+            </div>
+            <div class="lables">
+              <label for="birth-date">BirthDate:</label>
+              <input v-model="formBuild.birthDate" type="date" name="" id="" />
+            </div>
           </div>
           <div class="img_form">
             <img src="../assets/images/1.png" alt="" />
           </div>
         </section>
-        <div class="btn__primary">
-          <button>Submit</button>
+        <div class="btn btn__primary">
+          <button @click="showContenet">Submit</button>
+          <button v-if="hasshowresetbtn" @click="resetformefields">
+            reset
+          </button>
         </div>
       </div>
     </div>
   </div>
 </template>
 <script>
-import VuePersianDatetimePicker from "vue-persian-datetime-picker";
 export default {
   name: "formBuilder",
   data() {
@@ -47,10 +73,37 @@ export default {
         address: "",
         birthDate: "",
       },
+      hasshowresetbtn: false,
     };
   },
-  components: {
-    datePicker: VuePersianDatetimePicker,
+  methods: {
+    showContenet() {
+      this.hasshowresetbtn = true;
+      console.log(this.getAllUsers());
+      this.setUserToLocalStorage(this.formBuild);
+    },
+    resetformefields() {
+      this.formBuild = {
+        userName: "",
+        password: "",
+        email: "",
+        phoneNumber: "",
+        postalCode: "",
+        address: "",
+        birthDate: "",
+      };
+      this.hasshowresetbtn = false;
+    },
+    getAllUsers() {
+      return JSON.parse(localStorage.getItem("users"))
+        ? JSON.parse(localStorage.getItem("users"))
+        : [];
+    },
+    setUserToLocalStorage(user) {
+      localStorage.setItem("users", JSON.stringify(user));
+      let users = this.getAllUsers();
+      users.push(user);
+    },
   },
 };
 </script>
@@ -63,79 +116,59 @@ body {
   box-sizing: border-box;
   font-family: Poppins;
 }
+.content {
+  width: 100%;
+  height: 97vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
 .form {
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 97.5vh;
+  width: 100%;
 }
 .form-container {
-  background-color: rgb(236, 117, 117);
-  padding: 2rem;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-content: center;
-  height: 100%;
   width: 50%;
+  background-color: rgb(214, 213, 213);
+  border-radius: 7px;
 }
 .elements {
   display: flex;
   justify-content: space-between;
   align-items: center;
 }
-@media screen and (max-width: 600px) {
-  .form-container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-  }
-}
 .lable__form {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-}
-.lable__form label {
-  margin-bottom: 2rem;
-  padding: 0.9rem;
-}
-.input__form {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-end;
-}
-.input__form input {
-  margin-bottom: 2.1rem;
-  outline: none;
-  border: none;
-  padding: 1rem 1.5rem;
-  border-radius: 8px;
-}
-.img_form {
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  // background-color: brown;
   width: 100%;
-  img {
-    width: inherit;
-    height: inherit;
-  }
 }
-.btn__primary {
+.lables {
   display: flex;
-  justify-content: end;
+  justify-content: space-between;
   align-items: center;
-  button {
+  padding: 1rem;
+  input {
     outline: none;
     border: none;
-    padding: 1rem 1.25rem;
+    padding: 12px 13px;
+    border-radius: 8px;
+  }
+}
+.btn {
+  padding: 1rem;
+  display: flex;
+  justify-items: center;
+  justify-content: flex-end;
+  button {
+    border: none;
+    outline: none;
+    padding: 12px;
+    color: white;
+    background-color: rgba(57, 5, 100, 0.822);
     border-radius: 8px;
     cursor: pointer;
-    background-color: rgb(187, 66, 66);
-    color: white;
-    font-size: 0.85rem;
   }
 }
 </style>
