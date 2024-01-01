@@ -50,8 +50,8 @@
           </div>
         </section>
         <div class="btn btn__primary">
-          <button @click="showContenet">Submit</button>
-          <button v-if="hasshowresetbtn" @click="resetformefields">
+          <button @click="showContenet($event)">Submit</button>
+          <button v-if="hasshowresetbtn" @click="resetformefields()">
             reset
           </button>
         </div>
@@ -65,7 +65,7 @@ export default {
   data() {
     return {
       formBuild: {
-        id: 0,
+        id: Math.floor(Math.random() * 100),
         userName: "",
         password: "",
         email: "",
@@ -75,18 +75,19 @@ export default {
         birthDate: "",
       },
       hasshowresetbtn: false,
-      numberMax: 100000,
     };
   },
   methods: {
-    showContenet() {
+    showContenet(e) {
+      e.preventDefault();
       this.hasshowresetbtn = true;
-      console.log(this.getAllUsers());
+      const users = this.getAllUsers();
       this.setUserToLocalStorage(this.formBuild);
+      console.log(users);
+      this.resetformefields();
     },
     resetformefields() {
       this.formBuild = {
-        id: Date.now(),
         userName: "",
         password: "",
         email: "",
@@ -98,16 +99,15 @@ export default {
       this.hasshowresetbtn = false;
     },
     getAllUsers() {
-      return localStorage.getItem("users") ? localStorage.getItem("users") : [];
+      return JSON.parse(localStorage.getItem("users")) || [];
     },
     setUserToLocalStorage(user) {
-      this.userList.push(user);
-      let users = this.getAllUsers();
-      localStorage.setItem("users", JSON.stringify(users));
-      users.push(user);
-      // localStorage.setItem("users", JSON.stringify(user));
-      // console.log(localStorage.getItem("users"));
-      // console.log(users);
+      let userAll = this.getAllUsers();
+      userAll.push(user);
+      localStorage.setItem("users", JSON.stringify(userAll));
+    },
+    uniqeNumber() {
+      return Math.floor(Math.random() * 100);
     },
   },
 };

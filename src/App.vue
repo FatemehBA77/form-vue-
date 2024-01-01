@@ -1,5 +1,5 @@
 <template>
-   <!-- <div class="center">
+  <!-- <div class="center">
     <div class="form">
       <div class="fom-element">
         <input :type="type" v-model="userPassword" id="password-field" />
@@ -16,7 +16,7 @@
        to way binding 
     </div>
   </div>  -->
-  <formBuilder class="form-builder" />
+  <formBuilder key="componentKey" class="form-builder" />
 </template>
 <script>
 import formBuilder from "./components/formBuilder.vue";
@@ -27,6 +27,7 @@ export default {
   },
   data() {
     return {
+      componentKey: 0,
       type: "password",
       userPassword: "",
       formField: {
@@ -46,6 +47,9 @@ export default {
       console.log("start");
       this.type == "password" ? (this.type = "text") : (this.type = "password");
     },
+    forceRerender() {
+      this.componentKey += 1;  
+    }
   },
 };
 </script>
