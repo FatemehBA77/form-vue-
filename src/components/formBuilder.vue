@@ -88,6 +88,7 @@ export default {
     },
     resetformefields() {
       this.formBuild = {
+        id: Math.floor(Math.random() * 100),
         userName: "",
         password: "",
         email: "",
