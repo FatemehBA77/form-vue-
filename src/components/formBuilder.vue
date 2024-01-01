@@ -65,6 +65,7 @@ export default {
   data() {
     return {
       formBuild: {
+        id: 0,
         userName: "",
         password: "",
         email: "",
@@ -74,6 +75,7 @@ export default {
         birthDate: "",
       },
       hasshowresetbtn: false,
+      numberMax: 100000,
     };
   },
   methods: {
@@ -84,6 +86,7 @@ export default {
     },
     resetformefields() {
       this.formBuild = {
+        id: Date.now(),
         userName: "",
         password: "",
         email: "",
@@ -95,14 +98,16 @@ export default {
       this.hasshowresetbtn = false;
     },
     getAllUsers() {
-      return JSON.parse(localStorage.getItem("users"))
-        ? JSON.parse(localStorage.getItem("users"))
-        : [];
+      return localStorage.getItem("users") ? localStorage.getItem("users") : [];
     },
     setUserToLocalStorage(user) {
-      localStorage.setItem("users", JSON.stringify(user));
+      this.userList.push(user);
       let users = this.getAllUsers();
+      localStorage.setItem("users", JSON.stringify(users));
       users.push(user);
+      // localStorage.setItem("users", JSON.stringify(user));
+      // console.log(localStorage.getItem("users"));
+      // console.log(users);
     },
   },
 };
