@@ -54,18 +54,20 @@
           <button v-if="hasshowresetbtn" @click="resetformefields()">
             reset
           </button>
+          <button><router-link to="/foo">show table</router-link></button>
         </div>
       </div>
     </div>
   </div>
 </template>
 <script>
+import { v4 as uuidv4 } from "uuid";
 export default {
   name: "formBuilder",
   data() {
     return {
       formBuild: {
-        id: Math.floor(Math.random() * 100),
+        id: uuidv4(),
         userName: "",
         password: "",
         email: "",
@@ -76,6 +78,13 @@ export default {
       },
       hasshowresetbtn: false,
     };
+  },
+  watch: {
+    userName(val) {
+      if (val) {
+        console.log(val);
+      }
+    },
   },
   methods: {
     showContenet(e) {
@@ -88,7 +97,7 @@ export default {
     },
     resetformefields() {
       this.formBuild = {
-        id: Math.floor(Math.random() * 100),
+        id: uuidv4(),
         userName: "",
         password: "",
         email: "",
@@ -97,6 +106,7 @@ export default {
         address: "",
         birthDate: "",
       };
+      console.log("object :>> ", this.formBuild);
       this.hasshowresetbtn = false;
     },
     getAllUsers() {
