@@ -40,7 +40,8 @@
               <label for="address">Address:</label>
               <input v-model="formBuild.address" type="text" id="address" />
             </div>
-            <div class="lables">
+            <div class="lables" :class="{}">
+              <!-- CLASS BINDING -->
               <label for="birth-date">BirthDate:</label>
               <input v-model="formBuild.birthDate" type="date" name="" id="" />
             </div>
